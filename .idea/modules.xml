@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demoapp-1.0/appdemo-1.0/appdemo-1.0.iml" filepath="$PROJECT_DIR$/demoapp-1.0/appdemo-1.0/appdemo-1.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baselibrary/baselibrary.iml" filepath="$PROJECT_DIR$/baselibrary/baselibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/biz/biz.iml" filepath="$PROJECT_DIR$/biz/biz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/biz/biz-demo1/biz-demo1.iml" filepath="$PROJECT_DIR$/biz/biz-demo1/biz-demo1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/biz-libs/biz-libs.iml" filepath="$PROJECT_DIR$/biz-libs/biz-libs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commonlibs/commonlibs.iml" filepath="$PROJECT_DIR$/commonlibs/commonlibs.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demoapp-1.0/demoapp-1.0.iml" filepath="$PROJECT_DIR$/demoapp-1.0/demoapp-1.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/github_MyNetApplication.iml" filepath="$PROJECT_DIR$/github_MyNetApplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/otherlibs/jiaozivideoplayer/jiaozivideoplayer.iml" filepath="$PROJECT_DIR$/otherlibs/jiaozivideoplayer/jiaozivideoplayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commonlibs/libglide37/libglide37.iml" filepath="$PROJECT_DIR$/commonlibs/libglide37/libglide37.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commonlibs/libglin/libglin.iml" filepath="$PROJECT_DIR$/commonlibs/libglin/libglin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commonlibs/libmvp/libmvp.iml" filepath="$PROJECT_DIR$/commonlibs/libmvp/libmvp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commonlibs/libretrofit/libretrofit.iml" filepath="$PROJECT_DIR$/commonlibs/libretrofit/libretrofit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libsCenter/libsCenter.iml" filepath="$PROJECT_DIR$/libsCenter/libsCenter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commonlibs/libutils/libutils.iml" filepath="$PROJECT_DIR$/commonlibs/libutils/libutils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commonlibs/libvariants/libvariants.iml" filepath="$PROJECT_DIR$/commonlibs/libvariants/libvariants.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demoapp-1.0/module-1.0/module-1.0.iml" filepath="$PROJECT_DIR$/demoapp-1.0/module-1.0/module-1.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/otherlibs/otherlibs.iml" filepath="$PROJECT_DIR$/otherlibs/otherlibs.iml" />
+    </modules>
+  </component>
+</project>

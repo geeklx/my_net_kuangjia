@@ -1,0 +1,46 @@
+apply plugin: 'com.android.library'
+def config = rootProject.ext //配置
+def librarys = rootProject.ext.dependencies //依赖
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+
+    //common url
+    compile librarys.design
+    compile librarys.appcompatV7
+    compile librarys.recyclerviewv7
+    compile librarys.cardviewv7
+
+    compile librarys.glide37
+    compile librarys.fastJson
+    compile librarys.gsonJson
+
+    //common aar
+    compile project(':baselibrary')
+    compile(name: 'libglide37', ext: 'aar')
+    compile(name: 'libutils', ext: 'aar')
+    compile(name: 'libmvp', ext: 'aar')
+    compile(name: 'libretrofit', ext: 'aar')
+
+    /**rep*/compile(name: 'biz-demo1_env_ol', ext: 'aar')
+}

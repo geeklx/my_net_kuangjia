@@ -1,0 +1,21 @@
+configurations.maybeCreate("default")
+//artifacts.add("default", file('libutils.aar'))
+//artifacts.add("default", file('libbase.aar'))
+//artifacts.add("default", file('libnet.aar'))
+//artifacts.add("default", file('libhios.aar'))
+//artifacts.add("default", file('libmvp.aar'))
+//
+//artifacts.add("default", file('libflavors_bxn_401_comminity.aar'))
+//artifacts.add("default", file('libflavors_bxn_401_nation.aar'))
+//artifacts.add("default", file('libflavors_bxnt_401_comminity.aar'))
+//artifacts.add("default", file('libflavors_bxnt_401_nation.aar'))
+//
+//artifacts.add("default", file('biz-shop_bxn_401_comminity.aar'))
+//artifacts.add("default", file('biz-shop_bxn_401_nation.aar'))
+//artifacts.add("default", file('biz-shop_bxnt_401_comminity.aar'))
+//artifacts.add("default", file('biz-shop_bxnt_401_nation.aar'))
+//
+//artifacts.add("default", file('biz-test_bxn_401_comminity.aar'))
+//artifacts.add("default", file('biz-test_bxn_401_nation.aar'))
+//artifacts.add("default", file('biz-test_bxnt_401_comminity.aar'))
+//artifacts.add("default", file('biz-test_bxnt_401_nation.aar'))

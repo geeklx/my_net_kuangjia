@@ -1,0 +1,200 @@
+/**
+ * author: geek
+ *
+ * command: gradlew publish_ol \n
+ *          gradlew publish_preprod \n
+ *          gradlew publish_test \n
+ *          gradlew ch_var \n
+ *
+ * publish this project or change variants of your project
+ */
+
+apply from: './project_config.gradle'
+
+ext {
+    gradles = '/build.gradle'
+    rep = "/**rep*/"
+    aarPat = /.*compile\s*\(name:\s*["']\s*([\S]+?)_.*\).*/
+    supportReplacePat = /\/\*\*support:\s*(.*)\s*\*\//
+    appNamePat = /\/\*\*\s*appName:\s*(\S+?)\s*\*\//
+}
+
+//tasks.create(name: "publish") << {
+//    repFile variants[defaultVariantIndex]
+//    publish(defaultVariantIndex == 2)
+//}
+
+tasks.create(name: "publish_ol") << {
+    repFile variants[2]
+    publish(true)
+}
+
+tasks.create(name: "publish_preprod") << {
+    repFile variants[1]
+    publish(false)
+}
+
+tasks.create(name: "publish_test") << {
+    repFile variants[0]
+    publish(false)
+}
+
+tasks.create(name: 'ch_var') << {
+    repFile variants[defaultVariantIndex]
+}
+
+def publish(isRelease) {
+    def gradlewCmd = isWindows() ? "./gradlew.bat" : "./gradlew"
+    def cmd = isRelease ? ":assembleRelease" : ":assembleDebug"
+    def proc = Runtime.getRuntime().exec "${gradlewCmd} ${mainApp}${cmd}"
+    new StreamPrinter(proc.getInputStream(), "INFO").start()
+    new StreamPrinter(proc.getErrorStream(), "ERROR").start()
+    proc.waitFor()
+
+    repFile variants[defaultVariantIndex]
+}
+
+def repFile(String v) {
+    repFile "./${gradles}", v
+
+    modules.each {
+        def path = "./${it}/"
+        if (isSubModule(path)) {
+            repFile path + gradles, v
+            return
+        }
+
+        def current = file path
+        current.eachFile { file ->
+            if (file.isDirectory()) {
+                repFile file.path + gradles, v
+            }
+        }
+    }
+}
+
+def repFile(String f, String variant) {
+    def file = file f
+    if (!file.exists()) { return}
+    def txt = file.text
+
+    def lines = txt.readLines()
+    def size = lines.size()
+
+    for (def i = 0; i < size; i++) {
+        def line = lines[i]
+
+        def rep = repAAR line, variant
+        if (rep != "") {
+            txt = txt.replace line, rep
+        }
+
+        def matched = matchSupport line, variant
+        if (matched != 0 && i + 1 < size) {
+            def nextLine = lines[i + 1]
+            if (matched == 1) {
+                if (!nextLine.trim().startsWith("//")) {
+                    txt = txt.replace nextLine, "//" + nextLine
+                }
+            } else if (matched == 2) {
+                if (nextLine.trim().startsWith("//")) {
+                    txt = txt.replace nextLine, nextLine.replaceFirst("//", "")
+                }
+            }
+        }
+    }
+
+    file.write txt
+}
+
+/** return 0 no matched,
+ *  1 matched but not contains current variant,
+ *  2 matched and contains current variant*/
+def matchSupport(String line, String variant) {
+    def pattern = java.util.regex.Pattern.compile supportReplacePat
+    def matcher = pattern.matcher line
+    if (matcher.find()) {
+        def vs = matcher.group 1
+        def vsArray = vs.split ","
+        if (inArray(variant, vsArray)) {
+            return 2
+        }
+
+        return 1
+    }
+
+    return 0
+}
+
+def repAAR(String line, String variant) {
+    if (!line.trim().startsWith(rep)) {
+        return ""
+    }
+
+    def pattern = java.util.regex.Pattern.compile aarPat
+    def matcher = pattern.matcher line
+    if (matcher.find()) {
+        def libName = matcher.group 1
+        def blank = line.substring 0, line.indexOf(rep)
+        return "${blank}/**rep*/compile (name:'${libName}_${variantMapping variant}', ext:'aar')"
+    }
+
+    return ""
+}
+
+def isSubModule(module) {
+    return file(module + gradles).exists()
+}
+
+def inArray(String str, String[] array) {
+    for (item in array) {
+        if (item.trim().equals(str)) { return true}
+    }
+
+    return false
+}
+
+def isWindows() {
+    def osName = System.getProperty("os.name").toLowerCase()
+    def result = osName.startsWith "windows"
+    return result
+}
+
+
+public class StreamPrinter extends Thread {
+    private InputStream inputStream
+    private String type
+
+    StreamPrinter(InputStream inputStream, String type) {
+        this.inputStream = inputStream
+        this.type = type
+    }
+
+    public void run() {
+        BufferedReader br
+        try {
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream)
+            br = new BufferedReader(inputStreamReader)
+            String line = null
+            while ((line = br.readLine()) != null) {
+                println type + " > " + line
+
+                if (line.toLowerCase().contains("build failed")) {
+                    println "build failed, exit..."
+                    System.exit(1)
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace()
+        } finally {
+            if (br != null) {
+                try {
+                    br.close()
+                } catch (Exception e2) {
+                    e2.printStackTrace()
+                }
+            }
+        }
+    }
+}

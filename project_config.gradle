@@ -1,0 +1,13 @@
+ext {
+
+    defaultVariantIndex = 0
+    // 测试，预生产，线上
+    variants = ['ENV_TESTING', 'ENV_PREPROD', 'ENV_OL']
+
+    mainApp = ":app"
+    modules = [/*'modulerdemo', */'demoapp-1.0'/*,'module-1.0','module-2.0'*/]
+
+    variantMapping = { variant ->
+        return variant.toLowerCase()
+    }
+}

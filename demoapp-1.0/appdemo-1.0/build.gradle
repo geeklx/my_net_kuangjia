@@ -1,0 +1,105 @@
+apply plugin: 'com.android.application'
+
+def config = rootProject.ext //配置
+def librarys = rootProject.ext.dependencies //依赖
+
+android {
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
+    dexOptions {
+//        incremental true
+        javaMaxHeapSize "4g"
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+
+//    signingConfigs {
+//        debug {
+//            storeFile file('../../firebox_keystore.jks')
+//            keyAlias 'haier'
+//            keyPassword 'android'
+//            storePassword 'android'
+//        }
+//    }
+
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+    defaultConfig {
+//        buildConfigField "boolean", "IS_LOG_ENABLE", rootProject.ext.IS_LOG_ENABLE
+
+        applicationId "com.example.shining.appdemo1"
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName "APPDEMO" + config.versionName
+
+        multiDexEnabled true
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
+
+        ndk {
+            moduleName "aaaa,bbb"
+            ldLibs "log", "z", "m", "android", "c"
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+        }
+
+        sourceSets.main {
+            jni.srcDirs = []
+            //LOCAL_LDFLAGS += -fuse-ld=bfd
+            //jni.srcDirs 'src/main/jni'
+            jniLibs.srcDir 'src/main/libs'
+
+        }
+        signingConfig signingConfigs.debug
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+
+    compile librarys.design
+    compile librarys.appcompatV7
+    compile librarys.recyclerviewv7
+    compile librarys.cardviewv7
+
+
+    compile librarys.glide37
+
+    compile librarys.multidexVersion
+
+    //project
+    compile project(':baselibrary')
+    //图形处理
+    compile(name: 'libglide37', ext: 'aar')
+    //工具类
+    compile(name: 'libutils', ext: 'aar')
+    //网络请求类
+    compile(name: 'libglin', ext: 'aar')
+    //Retrofit
+    compile(name: 'libretrofit', ext: 'aar')
+//    compile project(':commonlibs:libretrofit')
+
+    compile project(':demoapp-1.0:module-1.0')
+//    compile project(':demoapp-1.0:module-2.0')
+}

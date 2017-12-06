@@ -1,0 +1,78 @@
+apply plugin: 'com.android.library'
+apply from: '../../assemble_dolast.gradle'
+
+def config = rootProject.ext //配置
+def librarys = rootProject.ext.dependencies //依赖
+
+android {
+    publishNonDefault true
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+//    productFlavors {
+//        ENV_TESTING {}
+//        ENV_PREPROD {}
+//        ENV_OL {}
+//    }
+//
+//    libraryVariants.all { variant ->
+//        variant.outputs.each { output ->
+//            def outputFile = output.outputFile
+//            if (outputFile != null && outputFile.name.endsWith('.aar')) {
+//                def fileName = "${project.name}_${variant.flavorName}.aar".toLowerCase()
+//                output.outputFile = new File(outputFile.parent, fileName)
+//            }
+//        }
+//    }
+
+
+    flavorDimensions "keep"
+    productFlavors {
+        env_testing { dimension "keep" }
+        env_preprod { dimension "keep" }
+        env_ol { dimension "keep" }
+    }
+
+    libraryVariants.all { variant ->
+        variant.outputs.all {
+//            outputFileName = "${variant.name}-${variant.versionName}.apk"
+            outputFileName = "${project.name}_${variant.flavorName}.aar"
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+//    compile "org.loader:glin-okclient:${rootProject.ext.okclientVersion}"
+    compile librarys.fastJson
+    compile librarys.okhttpVersion
+    compile librarys.okioVersion
+
+//    compile (name:'libnet', ext:'aar')
+    compile (name:'libmvp', ext:'aar')
+    compile(name: 'libutils', ext: 'aar')
+    compile(name: 'libglin', ext: 'aar')
+    compile(name: 'libretrofit', ext: 'aar')
+
+    env_testingCompile(name: 'libvariants_env_testing', ext: 'aar')
+    env_preprodCompile(name: 'libvariants_env_preprod', ext: 'aar')
+    env_olCompile(name: 'libvariants_env_ol', ext: 'aar')
+
+
+}
