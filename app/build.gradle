@@ -87,16 +87,16 @@ dependencies {
 
     compile librarys.multidexVersion
 
-    //project
-    compile project(':baselibrary')
-    //图形处理
-    compile(name: 'libglide37', ext: 'aar')
-    //工具类
-    compile(name: 'libutils', ext: 'aar')
-    //网络请求类
-    compile(name: 'libglin', ext: 'aar')
-    //Retrofit
-    compile(name: 'libretrofit', ext: 'aar')
-
-    compile project(':demoapp-1.0:module-1.0')
+//    //project
+//    compile project(':baselibrary')
+//    //图形处理
+//    compile(name: 'libglide37', ext: 'aar')
+//    //工具类
+//    compile(name: 'libutils', ext: 'aar')
+//    //网络请求类
+//    compile(name: 'libglin', ext: 'aar')
+//    //Retrofit
+//    compile(name: 'libretrofit', ext: 'aar')
+//
+//    compile project(':demoapp-1.0:module-1.0')
 }

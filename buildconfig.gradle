@@ -5,7 +5,7 @@ ext {
     minSdkVersion = 21
     targetSdkVersion = 27
     versionCode = 100001
-    versionName = "demo-1.0"
+    versionName = "appdemo-1.0"
 
 //    android = [
 //            compileSdkVersion = 25,

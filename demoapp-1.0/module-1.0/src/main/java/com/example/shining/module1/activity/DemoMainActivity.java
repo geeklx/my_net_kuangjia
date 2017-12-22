@@ -27,7 +27,6 @@ import com.example.shining.module1.glinbufen.presenter.Demo1GlinPresenter;
 import com.example.shining.module1.glinbufen.presenter.Demo1JuhePresenter;
 import com.example.shining.module1.glinbufen.view.Demo1JuheView;
 import com.example.shining.module1.glinbufen.view.Demo1View;
-import com.example.shining.module1.retrofitbufen.presenter.Demo1RetrofitPresenter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,8 +41,6 @@ public class DemoMainActivity extends AppCompatActivity implements Demo1View, De
     private Demo1GlinPresenter mDemo1Presenter = new Demo1GlinPresenter();
     //juhe glin
     private Demo1JuhePresenter mDemo1JuhePresenter = new Demo1JuhePresenter();
-    //retrofit
-    private Demo1RetrofitPresenter mDemo1RetrofitPresenter = new Demo1RetrofitPresenter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
