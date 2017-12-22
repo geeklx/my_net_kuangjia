@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "D:\\githubproject\\github_mykuangjia\\xin\\github\\my_net_kuangjia\\otherlibs\\jiaozivideoplayer\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-es\\values-es.xml",
+            "map": [
+                {
+                    "source": "D:\\githubproject\\github_mykuangjia\\xin\\github\\my_net_kuangjia\\otherlibs\\jiaozivideoplayer\\build\\intermediates\\bundles\\debug\\res\\values-es\\values-es.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,103,151,274,328",
+                        "endColumns": "47,47,122,53,60",
+                        "endOffsets": "98,146,269,323,384"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -18,6 +18,7 @@
       <module fileurl="file://$PROJECT_DIR$/libsCenter/libsCenter.iml" filepath="$PROJECT_DIR$/libsCenter/libsCenter.iml" />
       <module fileurl="file://$PROJECT_DIR$/commonlibs/libutils/libutils.iml" filepath="$PROJECT_DIR$/commonlibs/libutils/libutils.iml" />
       <module fileurl="file://$PROJECT_DIR$/commonlibs/libvariants/libvariants.iml" filepath="$PROJECT_DIR$/commonlibs/libvariants/libvariants.iml" />
+      <module fileurl="file://$PROJECT_DIR$/commonlibs/libwebview/libwebview.iml" filepath="$PROJECT_DIR$/commonlibs/libwebview/libwebview.iml" />
       <module fileurl="file://$PROJECT_DIR$/demoapp-1.0/module-1.0/module-1.0.iml" filepath="$PROJECT_DIR$/demoapp-1.0/module-1.0/module-1.0.iml" />
       <module fileurl="file://$PROJECT_DIR$/my_net_kuangjia.iml" filepath="$PROJECT_DIR$/my_net_kuangjia.iml" />
       <module fileurl="file://$PROJECT_DIR$/otherlibs/otherlibs.iml" filepath="$PROJECT_DIR$/otherlibs/otherlibs.iml" />

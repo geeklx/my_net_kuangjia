@@ -20,6 +20,7 @@ include ':baselibrary'
 include ':commonlibs',
         ':commonlibs:libglin',
         ':commonlibs:libglide37',
+        ':commonlibs:libwebview',
         ':commonlibs:libutils',
         ':commonlibs:libretrofit',
         ':commonlibs:libvariants',

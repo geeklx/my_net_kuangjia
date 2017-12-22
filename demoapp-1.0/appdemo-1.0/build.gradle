@@ -92,8 +92,8 @@ dependencies {
     compile project(':baselibrary')
     //图形处理
     compile(name: 'libglide37', ext: 'aar')
-    //工具类
-    compile(name: 'libutils', ext: 'aar')
+    //webview工具HIOS协议
+    compile(name: 'libwebview', ext: 'aar')
     //网络请求类
     compile(name: 'libglin', ext: 'aar')
     //Retrofit

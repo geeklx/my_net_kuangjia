@@ -39,7 +39,7 @@ dependencies {
     //common aar
     compile project(':baselibrary')
     compile(name: 'libglide37', ext: 'aar')
-    compile(name: 'libutils', ext: 'aar')
+    compile(name: 'libwebview', ext: 'aar')
     compile(name: 'libmvp', ext: 'aar')
     //网络请求 glin Retrofit
     compile(name: 'libglin', ext: 'aar')
