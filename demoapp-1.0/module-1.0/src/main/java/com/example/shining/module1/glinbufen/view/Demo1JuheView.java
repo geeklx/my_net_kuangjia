@@ -19,4 +19,10 @@ public interface Demo1JuheView extends GlinIView {
 
     void onGetDemo1JuheFlieFailed(String msg);
 
+    void onGetDemo1JuheRetrofitFlieSuccess(DemoJuheFileModel data);
+
+    void onGetDemo1JuheRetrofitFlieEmpty(DemoJuheFileModel data);
+
+    void onGetDemo1JuheRetrofitFlieFailed(String msg);
+
 }

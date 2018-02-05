@@ -14,10 +14,10 @@
         <activity android:name=".DemoWebviewMainActivity">
             <intent-filter>
                 <action android:name="hs.ac.webview.DemoWebviewMainActivity" />
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
+                <category android:name="android.intent.category.DEFAULT" />
 
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <!--<action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
         <!--1.0-->

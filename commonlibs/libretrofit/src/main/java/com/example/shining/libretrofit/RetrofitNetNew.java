@@ -42,9 +42,9 @@ public class RetrofitNetNew {
                 .addInterceptor(addHeaderInterceptor()) // token过滤
                 .addInterceptor(new LoggingInterceptor()) //日志,所有的请求响应度看到 LoggingInterceptor
                 .cache(cache)  //添加缓存
-                .connectTimeout(60l, TimeUnit.SECONDS)
-                .readTimeout(60l, TimeUnit.SECONDS)
-                .writeTimeout(60l, TimeUnit.SECONDS)
+                .connectTimeout(30l, TimeUnit.SECONDS)
+                .readTimeout(30l, TimeUnit.SECONDS)
+                .writeTimeout(30l, TimeUnit.SECONDS)
                 .build();
 
 //        client.dispatcher().runningCalls().get(0).request().tag()

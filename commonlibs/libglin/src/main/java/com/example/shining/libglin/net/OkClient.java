@@ -39,7 +39,7 @@ import okhttp3.Response;
 
 public class OkClient implements IClient {
     public static final String MSG_ERROR_HTTP = "msg_error_http:okhttp";
-    private static final long DEFAULT_TIME_OUT = 5000;
+    private static final long DEFAULT_TIME_OUT = 30 * 1000;
 
     private OkHttpClient mClient;
     private Handler mHandler;
@@ -151,7 +151,9 @@ public class OkClient implements IClient {
         if (map != null && !map.isEmpty()) {
             for (Map.Entry<String, String> entry : map.entrySet()) {
                 String value = entry.getValue();
-                if(value == null) { continue;}
+                if (value == null) {
+                    continue;
+                }
                 builder.addHeader(entry.getKey(), value);
             }
         }
@@ -204,12 +206,14 @@ public class OkClient implements IClient {
     private <T> void callback(final Call call, final Callback<T> callback,
                               final Result<T> result,
                               final RawResult rawResult) {
-        if(Looper.myLooper() == Looper.getMainLooper()) {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
             realCallback(call, callback, result, rawResult);
-        }else {
+        } else {
             getHandler().post(new Runnable() {
                 @Override
-                public void run() { realCallback(call, callback, result, rawResult);}
+                public void run() {
+                    realCallback(call, callback, result, rawResult);
+                }
             });
         }
     }
@@ -230,22 +234,26 @@ public class OkClient implements IClient {
                 .setType(MultipartBody.FORM);
 
         LinkedHashMap<String, String> map = params.get();
-        for(Map.Entry<String, String> entry : map.entrySet()) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
             String value = entry.getValue();
-            if(value == null) { continue;}
+            if (value == null) {
+                continue;
+            }
 
             builder.addPart(Headers.of("Content-Disposition",
-                    "form-data; name=\""+ entry.getKey() +"\""),
+                    "form-data; name=\"" + entry.getKey() + "\""),
                     RequestBody.create(null, value));
         }
 
         LinkedHashMap<String, File> files = params.files();
-        for(Map.Entry<String, File> entry : files.entrySet()) {
+        for (Map.Entry<String, File> entry : files.entrySet()) {
             File file = entry.getValue();
-            if(file == null) { continue;}
+            if (file == null) {
+                continue;
+            }
 
             builder.addPart(Headers.of("Content-Disposition",
-                    "form-data; name=\"" + entry.getKey() + "\";filename=\""+ file.getName() +"\""),
+                    "form-data; name=\"" + entry.getKey() + "\";filename=\"" + file.getName() + "\""),
                     RequestBody.create(MediaType.parse("application/octet-stream"), file));
         }
 
@@ -297,15 +305,17 @@ public class OkClient implements IClient {
     }
 
     private Handler getHandler() {
-        if(mHandler == null) { mHandler = new Handler(Looper.getMainLooper());}
+        if (mHandler == null) {
+            mHandler = new Handler(Looper.getMainLooper());
+        }
         return mHandler;
     }
 
     private OkHttpClient cloneClient() {
         return mClient.newBuilder()
                 .connectTimeout(mTimeOut, TimeUnit.MILLISECONDS)
-//                .readTimeout(mTimeOut, TimeUnit.MILLISECONDS)
-//                .writeTimeout(mTimeOut, TimeUnit.MILLISECONDS)
+                .readTimeout(mTimeOut, TimeUnit.MILLISECONDS)
+                .writeTimeout(mTimeOut, TimeUnit.MILLISECONDS)
                 .build();
     }
 }

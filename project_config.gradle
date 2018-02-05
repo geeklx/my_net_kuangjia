@@ -1,6 +1,6 @@
 ext {
 
-    defaultVariantIndex = 2
+    defaultVariantIndex = 0
     // 测试，预生产，线上
     variants = ['ENV_TESTING', 'ENV_PREPROD', 'ENV_OL']
 

@@ -10,6 +10,11 @@ import com.example.shining.module1.glinbufen.bean.glinnet.Demo1Model;
 
 import java.io.File;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.http.Multipart;
+import retrofit2.http.Part;
+
 /**
  * Created by shining on 2017/9/1.
  */
@@ -27,4 +32,13 @@ public interface ApiDemo1 {
     Call<DemoJuheFileModel> getfile(@Arg("file") File file, @Arg("rate") String rate, @Arg("pname") String pname, @Arg("device_id") String device_id, @Arg("key") String key);
 
 
+    // 上传多个文件
+    @Multipart
+    @retrofit2.http.POST("http://japi.juhe.cn/voice_words/getWords")
+    retrofit2.Call<DemoJuheFileModel> uploadFile(/*@Part("description") RequestBody description,*/
+                                                 @Part("rate") RequestBody rate,
+                                                 @Part("pname") RequestBody pname,
+                                                 @Part("device_id") RequestBody device_id,
+                                                 @Part("key") RequestBody key,
+                                                 @Part MultipartBody.Part file);
 }

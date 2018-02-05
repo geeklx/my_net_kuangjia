@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.shining.baselibrary.toasts.ToastUtil;
 import com.example.shining.libglide37.glide.GlideOptions;
@@ -35,6 +36,7 @@ import java.io.InputStream;
 
 public class DemoMainActivity extends AppCompatActivity implements Demo1View, Demo1JuheView {
 
+    private TextView tv1;
     private ImageView iv1;
 
     //glin
@@ -48,6 +50,7 @@ public class DemoMainActivity extends AppCompatActivity implements Demo1View, De
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_glin);
         iv1 = (ImageView) findViewById(R.id.iv1);
+        tv1 = (TextView) findViewById(R.id.tv1);
         iv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,19 +67,19 @@ public class DemoMainActivity extends AppCompatActivity implements Demo1View, De
 
         //TODO test Glin
         mDemo1Presenter.onCreate(DemoMainActivity.this);
-        mDemo1Presenter.getDemo1Presenter("user_id");
-
-        //TODO test JuheGlin
+//        mDemo1Presenter.getDemo1Presenter("user_id");
+//
+//        //TODO test JuheGlin
         mDemo1JuhePresenter.onCreate(this);
-        mDemo1JuhePresenter.getDemo1JuhePresenter("shehui", "03972d8ebd2a40194a80fa019b314fa3");
-
-        // 内置sd卡路径
-        try {
-            saveToSDCard("menling.mp3");
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
-        }
-        String sdcardPath2 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/menling.mp3";
+//        mDemo1JuhePresenter.getDemo1JuhePresenter("shehui", "03972d8ebd2a40194a80fa019b314fa3");
+//
+//        // 内置sd卡路径
+//        try {
+//            saveToSDCard("menling.mp3");
+//        } catch (Throwable throwable) {
+//            throwable.printStackTrace();
+//        }
+        String sdcardPath2 = Environment.getExternalStorageDirectory().getAbsolutePath() + "/2.wav";
         // apk目录
 //        String sdcardPath2 = "android.resource://" + App.get().getPackageName() + "/" + R.raw.menling;
         File file = new File(sdcardPath2);
@@ -87,7 +90,15 @@ public class DemoMainActivity extends AppCompatActivity implements Demo1View, De
         mDemo1JuhePresenter.getDemo1JuheFilePresenter(file, rate, pname, device_id, key);
 
         //TODO test Retrofit
-
+//        String sdcardPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/2.wav";
+//        // apk目录
+////        String sdcardPath2 = "android.resource://" + App.get().getPackageName() + "/" + R.raw.menling;
+//        File file1 = new File(sdcardPath);
+//        String rate1 = "16000";
+//        String pname1 = DemoMainActivity.this.getPackageName();
+//        String device_id1 = DeviceUtil.getMac(this);
+//        String key1 = "76fe50b78862b2450ee9f24c8622fd3f";
+//        mDemo1JuhePresenter.get_request_fileupload_retrofit(rate1, pname1, device_id1, key1, file1);
     }
 
     public void saveToSDCard(String name) throws Throwable {
@@ -189,10 +200,11 @@ public class DemoMainActivity extends AppCompatActivity implements Demo1View, De
         ToastUtil.showToastLong(msg);
     }
 
-
+    //glin file upload
     @Override
     public void onGetDemo1JuheFlieSuccess(DemoJuheFileModel data) {
         DemoJuheFileModel demoJuheFileModel = data;
+        tv1.setText(demoJuheFileModel.getResult());
     }
 
     @Override
@@ -203,5 +215,22 @@ public class DemoMainActivity extends AppCompatActivity implements Demo1View, De
     @Override
     public void onGetDemo1JuheFlieFailed(String msg) {
         ToastUtil.showToastLong(msg);
+    }
+
+    //retrofit file upload
+    @Override
+    public void onGetDemo1JuheRetrofitFlieSuccess(DemoJuheFileModel data) {
+        String a = data.getResult();
+        tv1.setText(a);
+    }
+
+    @Override
+    public void onGetDemo1JuheRetrofitFlieEmpty(DemoJuheFileModel data) {
+
+    }
+
+    @Override
+    public void onGetDemo1JuheRetrofitFlieFailed(String msg) {
+
     }
 }
